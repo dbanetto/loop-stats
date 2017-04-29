@@ -12,8 +12,6 @@ public class FindLoopsVisitor extends VoidVisitorAdapter<Void> {
 
     @Override
     public void visit(WhileStmt whileStmt, Void args) {
-        System.out.println(whileStmt);
-
         LoopStatsVisitor stat = new LoopStatsVisitor(LoopType.WHILE);
         stat.visit(whileStmt);
         stats.add(stat.getTrack());
@@ -23,8 +21,6 @@ public class FindLoopsVisitor extends VoidVisitorAdapter<Void> {
 
     @Override
     public void visit(ForStmt forStmt, Void args) {
-        System.out.println(forStmt);
-
         LoopStatsVisitor stat = new LoopStatsVisitor(LoopType.FOR);
         stat.visit(forStmt);
         stats.add(stat.getTrack());
@@ -34,8 +30,6 @@ public class FindLoopsVisitor extends VoidVisitorAdapter<Void> {
 
     @Override
     public void visit(ForeachStmt foreachStmt, Void args) {
-        System.out.println(foreachStmt);
-
         LoopStatsVisitor stat = new LoopStatsVisitor(LoopType.FOREACH);
         stat.visit(foreachStmt);
         stats.add(stat.getTrack());

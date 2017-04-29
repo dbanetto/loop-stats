@@ -27,19 +27,33 @@ public class Analyse {
 
                 FindLoopsVisitor finder = new FindLoopsVisitor();
                 finder.visit(compilationUnit, null);
-                System.out.print(f.getAbsolutePath());
-                System.out.println(finder.getStats());
+                System.out.println(f.getAbsolutePath());
+                printSummary(finder.getStats());
+                System.out.println();
 
                 totalStats.addAll(finder.getStats());
             }
 
-            System.out.print("total");
-            System.out.println(totalStats);
+            System.out.println("total");
+            printSummary(totalStats);
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
     }
 
+
+    private static void printSummary(List<Track> stats) {
+        HashMap<LoopType, Summary> summaries = new HashMap<>();
+        for (LoopType loop : LoopType.values()) {
+            summaries.put(loop, new Summary());
+        }
+
+        stats.stream()
+                .forEach(d -> summaries.get(d.getLoopType()).add(d));
+
+        summaries.entrySet().stream()
+                .forEach(entry -> System.out.println(entry.getKey() + "," + entry.getValue()));
+    }
 
 }
